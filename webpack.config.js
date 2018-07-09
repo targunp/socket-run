@@ -1,4 +1,5 @@
 const autoprefixer = require('autoprefixer');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
 module.exports = {
   entry: ['./app.scss', './app.js'],
@@ -10,6 +11,11 @@ module.exports = {
     https: true,
     
   },
+  plugins: [
+    new CopyWebpackPlugin([
+        { from: 'static' }
+    ])
+],
   devtool: "source-map", 
   module: {
     rules: [

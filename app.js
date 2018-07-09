@@ -1,8 +1,8 @@
 import {MDCRipple} from '@material/ripple';
 const ripple = new MDCRipple(document.querySelector('.mdc-button'));
 
-const firebase = require("firebase");
-require("firebase/firestore");
+import firebase from '@firebase/app';
+import '@firebase/firestore';
 firebase.initializeApp({
     apiKey: "AIzaSyB1jmbG8vz0_a-dvj40GDyXjz-l-bGLn70",
     authDomain: "socket-run.firebaseapp.com",
@@ -141,7 +141,7 @@ function updateProgress() {
             .doc(runnerId)
             .update({ distance: 100, end: endTime, finished: true });
     } else {
-        document.querySelector(".human-progress").textContent = currentDistance/100;
+        document.querySelector(".human-progress").textContent = Math.floor(currentDistance/100) * 100;
         db.collection("races")
             .doc(raceId)
             .collection("runners")
@@ -176,7 +176,7 @@ function updateOponent() {
                     } else if (!racing) {
                         document.querySelector(".status").textContent = "YOU WIN!";
                     } else {
-        document.querySelector(".robot-progress").textContent = data.distance/100;
+        document.querySelector(".robot-progress").textContent = Math.floor(data.distance/100) * 100;
                     }
                 }
             });
