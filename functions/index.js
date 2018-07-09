@@ -20,7 +20,7 @@ exports.createRunner = functions.firestore
                         .then((result) => {
                             return racesSnap.docs[0].ref.collection("runners")
                                 .doc(runnersContext.params.runnerId)
-                                .set({ created: new Date() });
+                                .set({ created: new Date(), distance: 0, finished: false });
                         }).then((result) => {
                             return change.after.ref.update({ racing: true, currentRace: racesSnap.docs[0].ref.id });
                         });
@@ -32,7 +32,7 @@ exports.createRunner = functions.firestore
                         .then((ref) => {
                             return ref.collection("runners")
                                 .doc(runnersContext.params.runnerId)
-                                .set({ created: new Date() }).then((result) => {
+                                .set({ created: new Date(), distance: 0, finished: false }).then((result) => {
                                     return change.after.ref.update({ racing: true, currentRace: ref.id });
                                 });
                         });
